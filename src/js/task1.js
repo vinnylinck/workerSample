@@ -9,6 +9,11 @@
     self.open = function () {
         self.db.open(self.onsuccess, self.onerror);
     };
+    
+    //
+    self.save = function () {
+        console.log(arguments);
+    };
 
 
     self.onsuccess = function () {
@@ -21,8 +26,9 @@
     };
 
     self.addEventListener('message', function (e) {
-        var request = e.data;
+        var request = JSON.parse(e.data);
 
+        console.log('- Worker executing method: ', e.data);
         self[request.method].apply(null, request.params);
 
     }, false);

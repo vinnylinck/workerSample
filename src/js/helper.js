@@ -1,4 +1,4 @@
-/*global self, indexedDB */
+/*global self, indexedDB, console */
 (function () {
     'use strict';
     
@@ -11,11 +11,17 @@
         var req = indexedDB.open('junk');
         
         req.onsuccess = function (e) {
+
+            // getting db instance
             self.db.instance = e.target.result;
             cbsuccess();
         };
         
         req.onfailure = cberror;
+        
+        req.onupgradeneeded = function (e) {
+            self.postMessage({ok: false, message: 'Need to upgrade.'});
+        };
     };
     
     
