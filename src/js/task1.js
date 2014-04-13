@@ -12,7 +12,8 @@
     
     //
     self.save = function () {
-        console.log(arguments);
+        var trans = self.db.instance.transaction(['stuffstore', 'readwrite']);
+        
     };
 
 
@@ -28,7 +29,7 @@
     self.addEventListener('message', function (e) {
         var request = JSON.parse(e.data);
 
-        console.log('- Worker executing method: ', e.data);
+        console.log('- Worker executing method: ' + request.method);
         self[request.method].apply(null, request.params);
 
     }, false);

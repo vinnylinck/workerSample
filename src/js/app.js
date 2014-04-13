@@ -37,7 +37,7 @@
                 "params": [
                     {
                         "name": 'My Stuff -  ' + new Date().toISOString(),
-                        "extId": new Date().gettime()
+                        "extId": new Date().getTime()
                     }
                 ]
             };
