@@ -10,10 +10,15 @@
         self.db.open(self.onsuccess, self.onerror);
     };
     
+    // drop database
+    self.dropDB = function () {
+        self.db.drop(self.onsuccess, self.onerror);
+    };
+    
     //
     self.save = function (obj) {
         self.db.put(obj, self.onsuccess, self.onerror);
-    }
+    };
 
 
     self.onsuccess = function () {

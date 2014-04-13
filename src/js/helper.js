@@ -7,6 +7,17 @@
 
 
     //
+    self.db.drop = function (cbsuccess, cberror) {
+        var req = indexedDB.deleteDatabase('junk');
+        
+        console.log('- Dropping database...');
+        
+        req.onfailure = cberror;
+        req.onsuccess = cbsuccess;
+        
+    };
+    
+    //
     self.db.put = function (record, cbsuccess, cberror) {
         var transaction = self.db.instance.transaction(['stuffstore'], 'readwrite'),
             store = transaction.objectStore('stuffstore'),
