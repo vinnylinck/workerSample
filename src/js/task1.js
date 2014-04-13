@@ -11,10 +11,9 @@
     };
     
     //
-    self.save = function () {
-        var trans = self.db.instance.transaction(['stuffstore', 'readwrite']);
-        
-    };
+    self.save = function (obj) {
+        self.db.put(obj, self.onsuccess, self.onerror);
+    }
 
 
     self.onsuccess = function () {
