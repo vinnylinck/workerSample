@@ -11,11 +11,12 @@
             worker1 = new Worker('js/task1.js');
             
             worker1.addEventListener('message', function (e) {
-                console.log('Worker said: ', e.data);
+                console.log('- Worker said: ', e.data);
             }, false);
 
-            worker1.postMessage('open');
-
+            // using working for IndexedDB access
+            console.log('- Opening connection...');
+            worker1.postMessage({method: 'open', params: []});
         };
 
     }

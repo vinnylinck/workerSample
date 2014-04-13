@@ -5,20 +5,25 @@
     // importing scripts
     self.importScripts('helper.js');
 
+    // db - open
+    self.open = function () {
+        self.db.open(self.onsuccess, self.onerror);
+    };
+
+
+    self.onsuccess = function () {
+        self.postMessage({"ok": true});
+    };
+
+    self.onerror = function () {
+        console.log('WORKER 1 # ', arguments);
+        self.postMessage({"ok": false});
+    };
 
     self.addEventListener('message', function (e) {
-        var m = e.data;
+        var request = e.data;
 
-        self.db[m](
-            function () {
-                self.postMessage('opened');
-            },
-            function () {
-                console.log(arguments);
-                self.postMessage('error');
-            }
-        );
-
+        self[request.method].apply(null, request.params);
 
     }, false);
 
